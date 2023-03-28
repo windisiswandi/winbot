@@ -1,5 +1,5 @@
 const axios = require('axios')
-const API_KEY_OPENAI = "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"
+const API_KEY_OPENAI = "{YOUR_API_KEY}"
 
 const chatGPTHandler = async (question, msg) => {
     return await axios({
