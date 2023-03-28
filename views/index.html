@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Whatsapp</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Whatsapp Server API</h1>
+        <p>Integrated with chatGPT</p>
+
+        <div class="app">
+            <img class="qr-img">
+            <div class="box-status">
+                <h2><b>Status Server</b></h2>
+                <ul id="logs"></ul>
+            </div>
+        </div>
+    </div>
+    
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+
+    <script>
+		$(document).ready(function() {
+			var socket = io();
+
+			socket.on('msg', function(msg) {
+				$('#logs').html(`<li>${msg}</li>`);
+			});
+
+			socket.on('qr', function(src) {
+				$('.qr-img').attr('src', src);
+				$('.qr-img').show();
+			});
+
+			socket.on('ready', function(data) {
+				$('.qr-img').hide();
+			});
+
+			socket.on('auth', function(data) {
+				$('.qr-img').hide();
+			});
+		});
+	</script>
+</body>
+</html>
